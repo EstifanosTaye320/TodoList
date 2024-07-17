@@ -2,37 +2,51 @@ import { TodoList } from "./modules/todoList.js";
 import { listItem } from "./elements/listItem.js";
 
 const listArea = document.querySelector("#list");
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll(".inputField");
 const todoList = new TodoList();
 
-todoList.todos.forEach((ele, id) => {
-  listArea.innerHTML += listItem(id + 1, ele.title, ele.message);
-});
-
-const blackShip = document.querySelectorAll(".theblackship");
-const toggle = document.querySelectorAll(".toggle");
-
-todoList.todos.forEach((ele, id) => {
-  toggle[id].addEventListener("click", function () {
-    blackShip[id].style.display =
-      blackShip[id].style.display === "flex" ? "none" : "flex";
-    todoList.todos[id].done();
+function main() {
+  todoList.todos.forEach((ele, id) => {
+    listArea.innerHTML += listItem(id + 1, ele.title, ele.message);
   });
 
-  blackShip[id].style.display = ele.isDone ? "flex" : "none";
+  const blackShip = document.querySelectorAll(".theblackship");
+  const toggle = document.querySelectorAll(".toggle");
+
+  todoList.todos.forEach((ele, id) => {
+    toggle[id].addEventListener("click", function () {
+      blackShip[id].style.display =
+        blackShip[id].style.display === "flex" ? "none" : "flex";
+
+      todoList.todos[id].done();
+
+      toggle[id].style.backgroundColor =
+        toggle[id].style.backgroundColor === "chartreuse"
+          ? "red"
+          : "chartreuse";
+    });
+
+    blackShip[id].style.display = ele.isDone ? "flex" : "none";
+  });
+}
+
+main();
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  let title, message;
+
+  inputs.forEach((ele, id) => {
+    if (id === 0) {
+      title = ele.value;
+    } else {
+      message = ele.value;
+    }
+    ele.value = "";
+  });
+
+  todoList.addtodo(title, message);
+  listArea.innerHTML = "";
+  main();
 });
-
-// toggle.forEach((ele, id) => {
-//   ele.addEventListener("click", function () {
-//     blackShip[id].style.display =
-//       blackShip[id].style.display == "flex" ? "none" : "flex";
-//     todoList.todos[id].done();
-//     console.log(todoList.todos[id].isDone);
-//   });
-// });
-
-// toggle[id].addEventListener("click", function () {
-//   blackShip[id].style.display =
-//     blackShip[id].style.display == "none" ? "flex" : "none";
-// });
-
-// console.log(toggle);

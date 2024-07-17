@@ -1,10 +1,7 @@
 import { TodoItem } from "./todoItem.js";
 
 function TodoList() {
-  this.todos = [
-    new TodoItem("Estif", "You did it"),
-    new TodoItem("Ted", "cleanout cat shit"),
-  ];
+  this.todos = [];
   this.addtodo = function (title, message) {
     const new_todo = new TodoItem();
     new_todo.message = message;
