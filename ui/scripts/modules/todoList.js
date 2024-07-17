@@ -1,4 +1,4 @@
-const TodoItem = require("./todoItem");
+import { TodoItem } from "./todoItem.js";
 
 function TodoList() {
   this.todos = [];
@@ -19,4 +19,6 @@ function TodoList() {
   };
 }
 
-module.exports = TodoList;
+export default {
+  TodoList,
+};

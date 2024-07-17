@@ -15,4 +15,6 @@ function TodoItem(title, message) {
   };
 }
 
-module.exports = TodoItem;
+export default {
+  TodoItem,
+};
